@@ -14,13 +14,19 @@ export const Game: VFC = () =>  {
   const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
+  const boldStyles = {
+    fontWeight: 700
+  };
+
   const moves = history.map((step, move) => {
     const desc = move ?
       'Go to move #' + move + "(" + colAndRows[move - 1][0] + ", " + colAndRows[move - 1][1] + ")":
       'Go to game start';
     return (
       <li key={move}>
+        {move === stepNumber ? <button onClick={() => jumpTo(move)} style={boldStyles}>{desc}</button> :
         <button onClick={() => jumpTo(move)}>{desc}</button>
+        }
       </li>
     );
   });
