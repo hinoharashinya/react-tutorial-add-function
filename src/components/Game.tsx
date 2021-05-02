@@ -12,7 +12,7 @@ export const Game: VFC = () =>  {
   const jumpTo = (step: number) => jumpToPast(step);
 
   const current = history[stepNumber];
-  const winner = calculateWinner(current.squares);
+  let winner = calculateWinner(current.squares);
 
   const boldStyles = {
     fontWeight: 700
@@ -45,9 +45,10 @@ export const Game: VFC = () =>  {
 
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Winner: " + current.squares[winner[0]];
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
+    winner = []
   }
 
   return (
@@ -56,6 +57,7 @@ export const Game: VFC = () =>  {
         <Board
           squares={current.squares}
           onClick={i => handleClick(i)}
+          winRow={winner}
         />
       </div>
       <div className="game-info">
