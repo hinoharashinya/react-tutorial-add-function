@@ -17,5 +17,11 @@ export const calculateWinner = (squares: Array<oneSquareType>) => {
       return [a,b,c];
     }
   }
-  return null;
+  for (let i=0; i < squares.length; i++){
+    if(squares[i]){
+    }else{
+      return null
+    }
+  }
+  return [10]
 }

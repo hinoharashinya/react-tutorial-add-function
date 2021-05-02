@@ -44,11 +44,14 @@ export const Game: VFC = () =>  {
   });
 
   let status;
-  if (winner) {
-    status = "Winner: " + current.squares[winner[0]];
-  } else {
+  if(winner === null){
     status = "Next player: " + (xIsNext ? "X" : "O");
-    winner = []
+    winner = [];
+  } else if(winner[0] === 10){
+    status = "Draw";
+    winner = [];
+  }else {
+    status = "Winner: " + current.squares[winner[0]];
   }
 
   return (
