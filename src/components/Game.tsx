@@ -28,8 +28,11 @@ export const Game: VFC = () =>  {
     for(let i=history.length -1; i !== 0; i--){
       reverseArr.push(i);
     }
-    console.log(reverseArr, move)
+
     let number = reverseFlg ? reverseArr[move] : move;
+    if(typeof number === "undefined"){
+      number = 0;
+    }
 
     const desc =  (reverseFlg === false && move) || (reverseFlg && move !== history.length -1) ?
       'Go to move #' + number + "(" + colAndRows[number - 1][0] + ", " + colAndRows[number - 1][1] + ")":
