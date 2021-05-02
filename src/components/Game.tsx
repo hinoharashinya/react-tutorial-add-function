@@ -1,4 +1,4 @@
-import React, {VFC} from 'react';
+import React, {VFC, useState} from 'react';
 import {Board} from "./Board";
 import {useGameControl} from "../hooks/useGameControl";
 import {calculateWinner} from "../utils/calculateWinner";
@@ -18,14 +18,26 @@ export const Game: VFC = () =>  {
     fontWeight: 700
   };
 
+  const [reverseFlg, setReverseFlg] = useState(false);
+  const reverseHistoryInf = () => {
+    setReverseFlg(!reverseFlg);
+  }
+
   const moves = history.map((step, move) => {
-    const desc = move ?
-      'Go to move #' + move + "(" + colAndRows[move - 1][0] + ", " + colAndRows[move - 1][1] + ")":
+    const reverseArr = [];
+    for(let i=history.length -1; i !== 0; i--){
+      reverseArr.push(i);
+    }
+    console.log(reverseArr, move)
+    let number = reverseFlg ? reverseArr[move] : move;
+
+    const desc =  (reverseFlg === false && move) || (reverseFlg && move !== history.length -1) ?
+      'Go to move #' + number + "(" + colAndRows[number - 1][0] + ", " + colAndRows[number - 1][1] + ")":
       'Go to game start';
     return (
       <li key={move}>
-        {move === stepNumber ? <button onClick={() => jumpTo(move)} style={boldStyles}>{desc}</button> :
-        <button onClick={() => jumpTo(move)}>{desc}</button>
+        {(reverseFlg && number === stepNumber) || (reverseFlg === false && move === stepNumber) ? <button style={boldStyles}>{desc}</button> :
+        <button onClick={() => jumpTo(number)}>{desc}</button>
         }
       </li>
     );
@@ -49,6 +61,7 @@ export const Game: VFC = () =>  {
       <div className="game-info">
         <div>{status}</div>
         <ol>{moves}</ol>
+        <button onClick={reverseHistoryInf}>Reverse History Order</button>
       </div>
     </div>
   );
