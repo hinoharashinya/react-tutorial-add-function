@@ -27,14 +27,14 @@ export const Board: VFC<boardProps> = (props) => {
     }
 
   }
-  const cols = [0,3,6,9];
+  const cols = [0,3,6];
   const rows = [0,1,2];
 
   return (
     <div>
       {rows.map(row =>
         <div className="board-row" key={row}>
-          {squares.slice(cols[row], cols[row + 1]).map( (square, index) => renderSquare(index + cols[row]))}
+          {cols.map( (square, index) => renderSquare(index + cols[row]))}
         </div>
       )}
     </div>
