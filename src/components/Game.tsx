@@ -35,7 +35,7 @@ export const Game: VFC = () =>  {
     }
 
     const desc =  (reverseFlg === false && move) || (reverseFlg && move !== history.length -1) ?
-      'Go to move #' + number + "(" + colAndRows[number - 1][0] + ", " + colAndRows[number - 1][1] + ")":
+      `Go to move #${number}(${colAndRows[number - 1][0]}, ${colAndRows[number - 1][1]})`:
       'Go to game start';
     return (
       <li key={move}>

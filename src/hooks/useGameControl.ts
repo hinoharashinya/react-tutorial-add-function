@@ -39,8 +39,7 @@ export const useGameControl = () => {
     }
     let slicedColAndRows = colAndRows.slice(0, stepNumber);
     slicedColAndRows.push(nextColAndRow);
-    let nextColAndRows:Array<Array<number>> = slicedColAndRows;
-    setColAndRows(nextColAndRows);
+    setColAndRows(slicedColAndRows);
 
     squares[i] = xIsNext ? "X" : "O";
     setHistory(copyedHistory.concat([
