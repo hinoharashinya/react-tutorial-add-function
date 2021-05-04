@@ -7,12 +7,14 @@ export const useGameControl = () => {
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
   const [colAndRows, setColAndRows] = useState<Array<Array<number>>>([]);
+  const [reverseFlg, setReverseFlg] = useState(false);
 
   const handleClickSquare = (i: number) => {
 
     const copyedHistory = history.slice(0, stepNumber + 1);
     const current = history[copyedHistory.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -56,5 +58,9 @@ export const useGameControl = () => {
     setXIsNext((step % 2) === 0);
   }
 
-  return {history, stepNumber, xIsNext, colAndRows, handleClickSquare, jumpToPast};
+  const reverseHistoryInf = () => {
+    setReverseFlg(!reverseFlg);
+  }
+
+  return {history, stepNumber, xIsNext, colAndRows, reverseFlg, handleClickSquare, jumpToPast, reverseHistoryInf};
 }
